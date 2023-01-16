@@ -95,7 +95,7 @@ namespace CourseManager.DataBase.SqlServer.DataAccess
 
       var skippedRecords = pageSize * (page - 1);
       
-      var orderedStudents = await StudentWithIncludes().Skip(skippedRecords).Take(pageSize).OrderBy(s => s.FirstName).ToListAsync();
+      var orderedStudents = await StudentWithIncludes().Where(s => s.FirstName != null).Skip(skippedRecords).Take(pageSize).OrderBy(s => s.FirstName).ToListAsync();
       
       var totalCount = orderedStudents.Count;
 

@@ -28,44 +28,8 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="CourseManager.Common.Tests\**" />
-    <Compile Remove="CourseManager.DataBase.SqlServer\**" />
-    <Compile Remove="CourseManager.DataStore.SqlServer.Tests\**" />
-    <Compile Remove="CourseManager.Integration.Tests\**" />
-    <Compile Remove="CourseManager.Models.Tests\**" />
-    <Compile Remove="CourseManager.Models\**" />
-    <Compile Remove="CourseManager.Services.Tests\**" />
-    <Compile Remove="CourseManager.Tests\**" />
-    <Compile Remove="CourseManagerServices\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="CourseManager.Common.Tests\**" />
-    <Content Remove="CourseManager.DataBase.SqlServer\**" />
-    <Content Remove="CourseManager.DataStore.SqlServer.Tests\**" />
-    <Content Remove="CourseManager.Integration.Tests\**" />
-    <Content Remove="CourseManager.Models.Tests\**" />
-    <Content Remove="CourseManager.Models\**" />
-    <Content Remove="CourseManager.Services.Tests\**" />
-    <Content Remove="CourseManager.Tests\**" />
-    <Content Remove="CourseManagerServices\**" />
-    <EmbeddedResource Remove="CourseManager.Common.Tests\**" />
-    <EmbeddedResource Remove="CourseManager.DataBase.SqlServer\**" />
-    <EmbeddedResource Remove="CourseManager.DataStore.SqlServer.Tests\**" />
-    <EmbeddedResource Remove="CourseManager.Integration.Tests\**" />
-    <EmbeddedResource Remove="CourseManager.Models.Tests\**" />
-    <EmbeddedResource Remove="CourseManager.Models\**" />
-    <EmbeddedResource Remove="CourseManager.Services.Tests\**" />
-    <EmbeddedResource Remove="CourseManager.Tests\**" />
-    <EmbeddedResource Remove="CourseManagerServices\**" />
-    <None Remove="$(SpaRoot)**" />
-    <None Remove="CourseManager.Common.Tests\**" />
-    <None Remove="CourseManager.DataBase.SqlServer\**" />
-    <None Remove="CourseManager.DataStore.SqlServer.Tests\**" />
-    <None Remove="CourseManager.Integration.Tests\**" />
-    <None Remove="CourseManager.Models.Tests\**" />
-    <None Remove="CourseManager.Models\**" />
-    <None Remove="CourseManager.Services.Tests\**" />
-    <None Remove="CourseManager.Tests\**" />
-    <None Remove="CourseManagerServices\**" />
+    
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
