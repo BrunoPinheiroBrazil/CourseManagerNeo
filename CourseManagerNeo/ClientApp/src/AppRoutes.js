@@ -1,3 +1,4 @@
+import { AtualizarCadastro } from "./components/AtualizarCadastro";
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
@@ -14,6 +15,10 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
+  },
+  {
+    path: '/atualizar-cadastro',
+    element: <AtualizarCadastro />
   }
 ];
 
