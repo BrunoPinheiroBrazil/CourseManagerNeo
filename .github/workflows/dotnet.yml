@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ development ]
 
+env:
+  INTEGRATION_TESTS: CourseManager.Integration.Tests/CourseManager.Integration.Tests.csproj
+  DATASTORE_TESTS: CourseManager.DataStore.SqlServer.Tests/CourseManager.DataStore.SqlServer.Tests.csproj
+  MODELS_TESTS: CourseManager.Models.Tests/CourseManager.Models.Tests.csproj
+  SERVICES_TESTS: CourseManager.Services.Tests/CourseManager.Services.Tests.csproj
+  API_TESTS: CourseManager.Tests/CourseManager.Tests.csproj
+
 jobs:
   build:
 
@@ -23,3 +30,78 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+  IntegrationTests:
+    
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Integration Tests
+      run: dotnet test $INTEGRATION_TESTS
+
+  APITests:
+    
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: API Tests
+      run: dotnet test $API_TESTS
+
+  ServicesTests:
+    
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Services Tests
+      run: dotnet test $SERVICES_TESTS
+
+  ModelTests:
+    
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Models Tests
+      run: dotnet test $MODELS_TESTS
+
+  DataStoreSQLTests:
+    
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: DataStore Tests
+      run: dotnet test $DATASTORE_TESTS
