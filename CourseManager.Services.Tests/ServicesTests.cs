@@ -184,10 +184,38 @@ namespace CourseManagerServicesTests
       _queries.Verify(q => q.GetStudent(studentId), Times.Once, "GetStudent should be called once");
       _commands.Verify(c => c.RemoveStudentAsync(currentStudent), Times.Once, "RemoveStudentAsync should be called once");
     }
-    #endregion
+		#endregion
 
-    #region Course
-    [Fact(DisplayName = "InsertCourse [Success]")]
+		#region Course
+		[Fact(DisplayName = "GetCourse [Success]")]
+		public async Task GetCourse_Success()
+		{
+			//Arrange
+			var courseId = 40303L;
+			var currentDbCourse = CommonTestsFactory.CreateCourse();
+      var translatedCourseDto = new CourseDto
+      {
+        CourseCode = currentDbCourse.CourseCode,
+        CourseId  = currentDbCourse.CourseId.ToString(),
+        CourseName = currentDbCourse.CourseName,
+        EndDate = currentDbCourse.EndDate,
+        StartDate = currentDbCourse.StartDate,
+        TeacherName = currentDbCourse.TeacherName
+      };
+
+			_queries.Setup(q => q.GetCourse(courseId)).ReturnsAsync(currentDbCourse);
+			_toDtoTranslator.Setup(t => t.ToCourseDto(currentDbCourse)).ReturnsAsync(translatedCourseDto);
+
+			//Act
+			var currentCourse = await _services.GetCourse(courseId);
+
+			//Assert
+			Assert.NotNull(currentCourse);
+			_queries.Verify(q => q.GetCourse(courseId), Times.Once, "GetStudent should be called once");
+			_toDtoTranslator.Verify(t => t.ToCourseDto(currentDbCourse), Times.Once, "ToStudentDto should be called once");
+		}
+
+		[Fact(DisplayName = "InsertCourse [Success]")]
     public async Task InsertCourse_Success()
     {
       //Arrange

@@ -1,6 +1,6 @@
 ﻿namespace CourseManager.Models.Dtos
 {
-  public class SearchTermsDto
+  public record SearchTermsDto
   {
     public string FirstName { get; set; }
   }

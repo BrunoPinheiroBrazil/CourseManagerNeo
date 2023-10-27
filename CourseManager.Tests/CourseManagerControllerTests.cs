@@ -164,6 +164,24 @@ namespace CourseManager.Tests
     #endregion
 
     #region Course
+
+    [Fact(DisplayName = "Get Course [Success]")]
+    public async Task GetCourse_Success()
+    {
+      //Arrange
+      var courseId = 3120L;
+      var courseDto = CommonTestsFactory.CreateCourseDto();
+      _services.Setup(s => s.GetCourse(courseId)).ReturnsAsync(courseDto);
+
+      //Act
+      var response = await _controller.GetCourse(courseId);
+
+      //Assert
+      var responseStatus = Assert.IsType<OkObjectResult>(response);
+      Assert.Equal(200, responseStatus.StatusCode);
+      _services.Verify(s => s.GetCourse(courseId), Times.Once, "GetCourse should be called once");
+    }
+
     [Fact(DisplayName = "Add Course [Success]")]
     public async Task InsertCourse_Success()
     {

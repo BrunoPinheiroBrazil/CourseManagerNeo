@@ -87,5 +87,11 @@ namespace CourseManager.Controllers
       await _services.DeleteStudentAsync(studentId);
       return NoContent();
     }
-  }
+
+    [HttpGet("course/{courseId}")]
+		public async Task<IActionResult> GetCourse(long courseId)
+		{
+      return Ok(await _services.GetCourse(courseId));
+		}
+	}
 }

@@ -17,7 +17,8 @@ namespace CourseManagerServices
     Task DeleteStudentAsync(long studentId);
     Task<(ICollection<StudentDto> studentsDto, int totalCount)> SearchStudentsAsync(SearchTermsDto searchTerms, int pageSize, int page);
     Task<(ICollection<StudentDto> studentsDto, int totalCount)> ListStudentsAsync(int pageSize, int page);
-  }
+		Task<CourseDto> GetCourse(long courseId);
+	}
 
   public class Services : IServices
   {
@@ -100,5 +101,11 @@ namespace CourseManagerServices
 
       return (studentsDto, totalCount);
     }
-  }
+
+		public async Task<CourseDto> GetCourse(long courseId)
+		{
+      var course = await _queries.GetCourse(courseId);
+      return await _toDtoTranslator.ToCourseDto(course);
+		}
+	}
 }

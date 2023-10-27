@@ -15,8 +15,8 @@ namespace CourseManager.Models.Tests
     {
       _toDtoTranslator = new ToDtoTranslator();
     }
-
-    [Fact(DisplayName ="ToStudentDto [Success]")]
+		#region Student
+		[Fact(DisplayName ="ToStudentDto [Success]")]
     public async Task ToStudentDto_Success()
     {
       //Arrange
@@ -29,7 +29,18 @@ namespace CourseManager.Models.Tests
       await DtoAsserts.AssertStudentDto(student, studentDto);
     }
 
-    [Fact(DisplayName = "ToStudentsDto [Success]")]
+		[Fact(DisplayName = "ToStudentDto [Success] - Return Null when receive null student")]
+		public async Task ToStudentDto_Success_Null_Value()
+		{
+			//Arrange
+			//Act
+			var studentDto = await _toDtoTranslator.ToStudentDto(null);
+
+      //Assert
+      Assert.Null(studentDto);
+		}
+
+		[Fact(DisplayName = "ToStudentsDto [Success]")]
     public async Task ToStudentsDto_Success()
     {
       //Arrange
@@ -46,5 +57,32 @@ namespace CourseManager.Models.Tests
       //Assert
       await DtoAsserts.AssertStudentsDto(students, studentsDto);
     }
-  }
+    #endregion
+
+    #region Course
+    [Fact(DisplayName = "ToCourseDto [Success]")]
+    public async Task ToCourseDto_Success()
+    {
+			//Arrange
+			var course = CommonTestsFactory.CreateCourse();
+
+			//Act
+			var courseDto = await _toDtoTranslator.ToCourseDto(course);
+
+			//Assert
+			await DtoAsserts.AssertCourseDto(course, courseDto);
+		}
+
+		[Fact(DisplayName = "ToCourseDto [Success] - Return null when null course")]
+		public async Task ToCourseDto_Success_Null_Value()
+		{
+			//Arrange
+			//Act
+			var courseDto = await _toDtoTranslator.ToCourseDto(null);
+
+			//Assert
+			Assert.Null(courseDto);
+		}
+		#endregion
+	}
 }

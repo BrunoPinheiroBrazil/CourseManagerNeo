@@ -2,7 +2,7 @@
 
 namespace CourseManager.Models.Dtos
 {
-  public class StudentDto
+  public record StudentDto
   {
     public long StudentId { get; set; }
     public string FirstName { get; set; }

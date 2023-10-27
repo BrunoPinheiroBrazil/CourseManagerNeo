@@ -9,6 +9,35 @@ namespace CourseManager.Common.Tests
 {
   public static class DtoAsserts
   {
+    public async static Task AssertCourseDto(Course expectedCourse, CourseDto currentCourseDto)
+    {
+      var tasks = new List<Task>();
+
+      tasks.AddRange(new List<Task>
+      {
+        Task.Run(() =>
+        {
+          Assert.Equal(expectedCourse.CourseCode, currentCourseDto.CourseCode);
+        }),
+				Task.Run(() =>
+				{
+					Assert.Equal(expectedCourse.TeacherName, currentCourseDto.TeacherName);
+				}),
+				Task.Run(() =>
+				{
+					Assert.Equal(expectedCourse.StartDate, currentCourseDto.StartDate);
+				}),
+				Task.Run(() =>
+				{
+					Assert.Equal(expectedCourse.CourseName, currentCourseDto.CourseName);
+				}),
+				Task.Run(() =>
+				{
+					Assert.Equal(expectedCourse.CourseId.ToString(), currentCourseDto.CourseId);
+				})
+			});
+    }
+
     public async static Task AssertStudentDto(Student expectedStudent, StudentDto currentStudentDto)
     {
       var tasks = new List<Task>();
