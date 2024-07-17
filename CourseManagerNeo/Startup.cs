@@ -62,6 +62,8 @@ namespace CourseManager
       using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
       {
         var context = serviceScope.ServiceProvider.GetService<CourseManagerDbContext>();
+        if (context == null)
+          throw new Exception("Could not create Database Context");
         context.Database.Migrate();
       }
     }
