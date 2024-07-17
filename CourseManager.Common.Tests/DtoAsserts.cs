@@ -19,23 +19,23 @@ namespace CourseManager.Common.Tests
         {
           Assert.Equal(expectedCourse.CourseCode, currentCourseDto.CourseCode);
         }),
-				Task.Run(() =>
-				{
-					Assert.Equal(expectedCourse.TeacherName, currentCourseDto.TeacherName);
-				}),
-				Task.Run(() =>
-				{
-					Assert.Equal(expectedCourse.StartDate, currentCourseDto.StartDate);
-				}),
-				Task.Run(() =>
-				{
-					Assert.Equal(expectedCourse.CourseName, currentCourseDto.CourseName);
-				}),
-				Task.Run(() =>
-				{
-					Assert.Equal(expectedCourse.CourseId.ToString(), currentCourseDto.CourseId);
-				})
-			});
+        Task.Run(() =>
+        {
+          Assert.Equal(expectedCourse.TeacherName, currentCourseDto.TeacherName);
+        }),
+        Task.Run(() =>
+        {
+          Assert.Equal(expectedCourse.StartDate, currentCourseDto.StartDate);
+        }),
+        Task.Run(() =>
+        {
+          Assert.Equal(expectedCourse.CourseName, currentCourseDto.CourseName);
+        }),
+        Task.Run(() =>
+        {
+          Assert.Equal(expectedCourse.CourseId.ToString(), currentCourseDto.CourseId);
+        })
+      });
     }
 
     public async static Task AssertStudentDto(Student expectedStudent, StudentDto currentStudentDto)

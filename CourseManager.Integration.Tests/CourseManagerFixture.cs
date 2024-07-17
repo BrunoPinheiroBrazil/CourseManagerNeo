@@ -92,7 +92,7 @@ namespace CourseManager.Integration.Tests
     public async Task<int> PostInApi(string url, string jsonBody, string source = null)
     {
       var request = new HttpRequestMessage(HttpMethod.Post, url);
-      
+
       if (!string.IsNullOrEmpty(source))
         request.Headers.Add("source", source);
 
@@ -116,8 +116,8 @@ namespace CourseManager.Integration.Tests
     public async Task<HttpStatusCode> PutInApi(string url, string jsonBody, string source = null)
     {
       var request = new HttpRequestMessage(HttpMethod.Put, url);
-      
-      if(!string.IsNullOrWhiteSpace(source))
+
+      if (!string.IsNullOrWhiteSpace(source))
         request.Headers.Add("source", source);
 
       request.Content = CreateHttpJsonBody(jsonBody);

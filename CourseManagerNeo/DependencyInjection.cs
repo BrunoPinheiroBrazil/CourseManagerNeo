@@ -1,7 +1,6 @@
 ﻿using CourseManager.DataBase.SqlServer.DataAccess;
 using CourseManager.Models.Translators;
 using CourseManagerServices;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CourseManager
 {

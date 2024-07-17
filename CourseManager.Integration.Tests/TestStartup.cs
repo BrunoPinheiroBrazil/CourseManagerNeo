@@ -1,6 +1,5 @@
 ﻿using CourseManager.DataBase.SqlServer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +24,6 @@ namespace CourseManager.Integration.Tests
       var options = serviceProvider.GetService<DbContextOptions<CourseManagerDbContext>>();
       services.AddScoped(s => new FakeDbContext(options));
     }
-    protected override void MigrateDB(IApplicationBuilder app){}
+    protected override void MigrateDB(IApplicationBuilder app) { }
   }
 }

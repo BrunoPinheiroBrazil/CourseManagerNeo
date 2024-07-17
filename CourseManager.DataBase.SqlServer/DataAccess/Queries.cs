@@ -61,7 +61,7 @@ namespace CourseManager.DataBase.SqlServer.DataAccess
       return (orderedStudents, totalCount);
     }
 
-    private IQueryable<Student> SearchStudentQuery(string firstName = null, int page =  1, int pageSize = 25)
+    private IQueryable<Student> SearchStudentQuery(string firstName = null, int page = 1, int pageSize = 25)
     {
       var allQueriesOR = new List<Expression<Func<Student, bool>>>();
       if (!string.IsNullOrEmpty(firstName))
@@ -94,9 +94,9 @@ namespace CourseManager.DataBase.SqlServer.DataAccess
         page = 1;
 
       var skippedRecords = pageSize * (page - 1);
-      
+
       var orderedStudents = await StudentWithIncludes().Where(s => s.FirstName != null).Skip(skippedRecords).Take(pageSize).OrderBy(s => s.FirstName).ToListAsync();
-      
+
       var totalCount = orderedStudents.Count;
 
       return (orderedStudents, totalCount);
