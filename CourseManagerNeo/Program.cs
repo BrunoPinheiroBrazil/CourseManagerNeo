@@ -1,4 +1,3 @@
-using CourseManager;
 using CourseManager.DataBase.SqlServer;
 using CourseManager.DataBase.SqlServer.DataAccess;
 using CourseManager.Models.Translators;
