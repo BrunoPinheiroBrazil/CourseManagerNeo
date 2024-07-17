@@ -46,9 +46,9 @@ namespace CourseManager.Models.Tests
       //Arrange
       var students = new List<Student>
       {
-        CommonTestsFactory.CreateStudent("F", 15),
-        CommonTestsFactory.CreateStudent("F", 15),
-        CommonTestsFactory.CreateStudent("F", 15),
+        CommonTestsFactory.CreateStudent(gender: "F",randomLength: 15),
+        CommonTestsFactory.CreateStudent(gender: "F",randomLength: 15),
+        CommonTestsFactory.CreateStudent(gender : "F", randomLength : 15),
       };
 
       //Act
