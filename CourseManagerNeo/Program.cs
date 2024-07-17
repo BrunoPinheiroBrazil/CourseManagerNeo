@@ -1,5 +1,8 @@
 using CourseManager;
 using CourseManager.DataBase.SqlServer;
+using CourseManager.DataBase.SqlServer.DataAccess;
+using CourseManager.Models.Translators;
+using CourseManagerServices;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -9,8 +12,13 @@ ConfigurationManager config = builder.Configuration;
 
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddMvc().AddApplicationPart(typeof(Assembly).Assembly);
-builder.Services.AddDependencyServices();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IToEntityTranslator, ToEntityTranslator>();
+builder.Services.AddScoped<IToDtoTranslator, ToDtoTranslator>();
+builder.Services.AddScoped<IServices, Services>();
+builder.Services.AddScoped<ICommands, Commands>();
+builder.Services.AddTransient<IQueries, Queries>();
 
 builder.Services.AddDbContext<CourseManagerDbContext>(options =>
 {

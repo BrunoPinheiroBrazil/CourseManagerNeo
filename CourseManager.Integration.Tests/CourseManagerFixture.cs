@@ -16,18 +16,9 @@ using System.Threading.Tasks;
 
 namespace CourseManager.Integration.Tests
 {
-  public class CustomWebApplicationFactory<TStartup>
-    : WebApplicationFactory<TStartup> where TStartup : class
+  public class CustomWebApplicationFactory<TProgram>
+    : WebApplicationFactory<TProgram> where TProgram : class
   {
-    protected override IHostBuilder CreateHostBuilder()
-    {
-      var builder = Host.CreateDefaultBuilder()
-                          .ConfigureWebHostDefaults(whd =>
-                          {
-                            whd.UseStartup<TestStartup>().UseTestServer();
-                          });
-      return builder;
-    }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
       builder.ConfigureServices(services =>
@@ -38,9 +29,14 @@ namespace CourseManager.Integration.Tests
 
         services.Remove(descriptor);
 
+       descriptor = services.SingleOrDefault(
+         d => d.ServiceType == typeof(CourseManagerDbContext));
+
+        services.Remove(descriptor);
+
         services.AddDbContext<CourseManagerDbContext>(options =>
         {
-          options.UseInMemoryDatabase("InMemoryDbForTesting");
+          options.UseSqlite("DataSource=:memory:");
         });
 
         var sp = services.BuildServiceProvider();
@@ -50,7 +46,7 @@ namespace CourseManager.Integration.Tests
           var scopedServices = scope.ServiceProvider;
           var db = scopedServices.GetRequiredService<CourseManagerDbContext>();
           var logger = scopedServices
-              .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
+              .GetRequiredService<ILogger<CustomWebApplicationFactory<Program>>>();
 
           db.Database.EnsureCreated();
 
@@ -65,16 +61,17 @@ namespace CourseManager.Integration.Tests
           }
         }
       });
+      builder.UseEnvironment("Development");
     }
   }
   public class CourseManagerFixture
   {
-    private readonly CustomWebApplicationFactory<TestStartup> _factory;
+    private readonly CustomWebApplicationFactory<Program> _factory;
     public HttpClient _client;
 
     public CourseManagerFixture()
     {
-      _factory = new CustomWebApplicationFactory<TestStartup>();
+      _factory = new CustomWebApplicationFactory<Program>();
       _client = _factory
             .WithWebHostBuilder(builder => builder.UseSolutionRelativeContentRoot("./"))
             .CreateClient();
