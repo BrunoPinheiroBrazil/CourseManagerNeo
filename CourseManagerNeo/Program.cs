@@ -3,6 +3,7 @@ using CourseManager.DataBase.SqlServer.DataAccess;
 using CourseManager.Models.Translators;
 using CourseManagerServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,7 +42,7 @@ app.MapControllerRoute(
 
 using (var svcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
-  var context = svcScope.ServiceProvider.GetService<CourseManagerDbContext>();
+  var context = svcScope.ServiceProvider.GetRequiredService<CourseManagerDbContext>();
   if (context == null)
     throw new Exception("Could not create DBContext");
 
