@@ -41,14 +41,22 @@ app.MapControllerRoute(
   pattern: "{controller}/{action=Index}/{id?}"
 );
 
-//using (var svcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-//{
-//  var context = svcScope.ServiceProvider.GetRequiredService<CourseManagerDbContext>();
-//  if (context == null)
-//    throw new Exception("Could not create DBContext");
+using (var svcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+  var context = svcScope.ServiceProvider.GetRequiredService<CourseManagerDbContext>();
+  if (context == null)
+    throw new Exception("Could not create DBContext");
 
-//  context.Database.Migrate();
-//}
+  try
+  {
+    context.Database.Migrate();
+  }
+  catch (Exception ex) 
+  { 
+    if(!ex.Message.Contains("already exists"))
+      throw new Exception(ex.Message);
+  }
+}
 
 app.Run();
 

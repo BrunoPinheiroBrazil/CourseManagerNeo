@@ -28,6 +28,7 @@ namespace CourseManager.Integration.Tests
 
         services.AddDbContext<CourseManagerDbContext>((container, options) =>
         {
+          //options.UseSqlite("Data Source=:memory:");
           options.UseSqlite("Data Source=Database.db");
         });
 
