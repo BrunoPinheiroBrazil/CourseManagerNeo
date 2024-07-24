@@ -2,15 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Data.Common;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -25,41 +23,26 @@ namespace CourseManager.Integration.Tests
     {
       builder.ConfigureServices(services =>
       {
-        var dbContextDescriptor = services.SingleOrDefault(
-            d => d.ServiceType ==
-                typeof(DbContextOptions<CourseManagerDbContext>));
-
-        services.Remove(dbContextDescriptor);
-
-        var connectionDescriptor = services.SingleOrDefault(
-          d => d.ServiceType == typeof(DbConnection));
-
-        services.Remove(connectionDescriptor);
-
-        services.AddSingleton<DbConnection>(container =>
-        {
-          var connection = new SqliteConnection("DataSource=:memory:");
-          connection.Open();
-
-          return connection;
-        });
+        services.RemoveAll(typeof(DbContextOptions<CourseManagerDbContext>));
+        services.RemoveAll(typeof(CourseManagerDbContext));
 
         services.AddDbContext<CourseManagerDbContext>((container, options) =>
         {
-          var connection = container.GetRequiredService<DbConnection>();
-          options.UseSqlite(connection);
+          options.UseSqlite("Data Source=Database.db");
         });
 
-        var sp = services.BuildServiceProvider();
-
-        using (var scope = sp.CreateScope())
+        using (var sp = services.BuildServiceProvider())
         {
+          var scope = sp.CreateScope();
           var scopedServices = scope.ServiceProvider;
           var db = scopedServices.GetRequiredService<CourseManagerDbContext>();
           var logger = scopedServices
               .GetRequiredService<ILogger<CustomWebApplicationFactory<Program>>>();
 
+          db.Database.OpenConnection();
+
           db.Database.EnsureCreated();
+
 
           try
           {
@@ -69,6 +52,7 @@ namespace CourseManager.Integration.Tests
           {
             logger.LogError(ex, "An error occurred seeding the " +
                 "database with test messages. Error: {Message}", ex.Message);
+            db.Database.CloseConnection();
           }
         }
       });

@@ -192,7 +192,7 @@ namespace CourseManager.Integration.Tests
     public async Task Update_Course_Failure_Student_Does_Not_Exists()
     {
       //Arrange
-      var courseId = 434354;
+      var courseId = -1;
       var url = $"coursemanager/update/course/{courseId}";
       var courseDto = CommonTestsFactory.CreateCourseDto();
 

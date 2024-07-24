@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourseManager.Models.Entities
 {
   public class Student
   {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long StudentId { get; set; }
     public string FirstName { get; set; }
     public string SurName { get; set; }

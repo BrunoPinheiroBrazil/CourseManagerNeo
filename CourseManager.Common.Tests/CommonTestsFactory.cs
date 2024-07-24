@@ -51,11 +51,15 @@ namespace CourseManager.Common.Tests
       };
     }
 
-    public static Student CreateStudent(string gender, int randomLength, StudentDto studentDto = null)
+    public static Student CreateStudent(string gender, int randomLength, StudentDto studentDto = null, int Id = 0)
     {
+      var randomizer = new Random();
+      var randomNumber = randomizer.Next(randomLength);
+
       if (studentDto != null)
         return new Student
         {
+          StudentId = Id!=0 ? Id : randomNumber,
           FirstName = studentDto.FirstName,
           SurName = studentDto.SurName,
           Address1 = studentDto.Address1,
@@ -68,6 +72,7 @@ namespace CourseManager.Common.Tests
       var randomString = RandomString(randomLength);
       return new Student
       {
+        StudentId = Id != 0 ? Id : randomNumber,
         FirstName = $"SomeFirstName {randomString}",
         SurName = $"SomeSurName {randomString}",
         Address1 = $"SomeAddres1{randomString}",
@@ -78,11 +83,15 @@ namespace CourseManager.Common.Tests
       };
     }
 
-    public static Course CreateCourse(CourseDto courseDto = null)
+    public static Course CreateCourse(CourseDto courseDto = null, int randomLength = 0, long Id = 0)
     {
+      var randomizer = new Random();
+      var randomNumber = randomizer.Next(randomLength);
+
       if (courseDto != null)
         return new Course
         {
+          CourseId = Id != 0 ? Id : randomNumber,
           CourseCode = courseDto.CourseCode,
           CourseName = courseDto.CourseName,
           TeacherName = courseDto.TeacherName,
@@ -93,6 +102,7 @@ namespace CourseManager.Common.Tests
       var randomString = RandomString(4);
       return new Course
       {
+        CourseId = Id != 0 ? Id : randomNumber,
         CourseCode = $"CourseCode{randomString}",
         CourseName = $"CourseName{randomString}",
         TeacherName = $"TeacherName{randomString}",

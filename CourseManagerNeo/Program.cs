@@ -3,7 +3,7 @@ using CourseManager.DataBase.SqlServer.DataAccess;
 using CourseManager.Models.Translators;
 using CourseManagerServices;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using System.Data.Common;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +22,8 @@ builder.Services.AddTransient<IQueries, Queries>();
 
 builder.Services.AddDbContext<CourseManagerDbContext>(options =>
 {
-  options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BrunoEstudos;Trusted_Connection=True;MultipleActiveResultSets=true");
+  if(!options.IsConfigured)
+    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BrunoEstudos;Trusted_Connection=True;MultipleActiveResultSets=true");
 });
 
 var app = builder.Build();
@@ -40,15 +41,15 @@ app.MapControllerRoute(
   pattern: "{controller}/{action=Index}/{id?}"
 );
 
-using (var svcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-{
-  var context = svcScope.ServiceProvider.GetRequiredService<CourseManagerDbContext>();
-  if (context == null)
-    throw new Exception("Could not create DBContext");
+//using (var svcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+//{
+//  var context = svcScope.ServiceProvider.GetRequiredService<CourseManagerDbContext>();
+//  if (context == null)
+//    throw new Exception("Could not create DBContext");
 
-  context.Database.Migrate();
-}
+//  context.Database.Migrate();
+//}
 
 app.Run();
 
-public partial class Program { }
+public partial class Program {}

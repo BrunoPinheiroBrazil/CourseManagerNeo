@@ -25,20 +25,20 @@ namespace CourseManager.Integration.Tests
     {
       return new List<Student>()
       {
-          CommonTestsFactory.CreateStudent("M", 4),
-          CommonTestsFactory.CreateStudent("F", 4),
-          CommonTestsFactory.CreateStudent("M", 4),
-          CommonTestsFactory.CreateStudent("F", 4)
+          CommonTestsFactory.CreateStudent(gender:"M", randomLength:0, Id: 1),
+          CommonTestsFactory.CreateStudent("F", randomLength:0, Id: 2),
+          CommonTestsFactory.CreateStudent("M", randomLength:0, Id: 3),
+          CommonTestsFactory.CreateStudent("F", randomLength:0, Id: 4)
       };
     }
     private static List<Course> GetCoursesList()
     {
       return new List<Course>()
       {
-          CommonTestsFactory.CreateCourse(),
-          CommonTestsFactory.CreateCourse(),
-          CommonTestsFactory.CreateCourse(),
-          CommonTestsFactory.CreateCourse()
+          CommonTestsFactory.CreateCourse(Id: 1),
+          CommonTestsFactory.CreateCourse(Id: 2),
+          CommonTestsFactory.CreateCourse(Id: 3),
+          CommonTestsFactory.CreateCourse(Id: 4)
       };
     }
   }
