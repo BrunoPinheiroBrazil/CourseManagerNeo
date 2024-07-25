@@ -51,7 +51,7 @@ namespace CourseManager.Common.Tests
       };
     }
 
-    public static Student CreateStudent(string gender, int randomLength, StudentDto studentDto = null, int Id = 0)
+    public static Student CreateStudent(string gender, int randomLength = 0, StudentDto studentDto = null, int Id = 0)
     {
       var randomizer = new Random();
       var randomNumber = randomizer.Next(randomLength);

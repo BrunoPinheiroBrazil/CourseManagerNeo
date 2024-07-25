@@ -57,7 +57,7 @@ namespace CourseManager.Integration.Tests
           }
         }
       });
-      builder.UseEnvironment("Development");
+      builder.UseEnvironment("Testing");
     }
   }
   public class CourseManagerFixture

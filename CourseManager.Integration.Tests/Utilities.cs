@@ -25,10 +25,10 @@ namespace CourseManager.Integration.Tests
     {
       return new List<Student>()
       {
-          CommonTestsFactory.CreateStudent(gender:"M", randomLength:0, Id: 1),
-          CommonTestsFactory.CreateStudent("F", randomLength:0, Id: 2),
-          CommonTestsFactory.CreateStudent("M", randomLength:0, Id: 3),
-          CommonTestsFactory.CreateStudent("F", randomLength:0, Id: 4)
+          CommonTestsFactory.CreateStudent(gender:"M", Id: 1),
+          CommonTestsFactory.CreateStudent("F", Id: 2),
+          CommonTestsFactory.CreateStudent("M", Id: 3),
+          CommonTestsFactory.CreateStudent("F", Id: 4)
       };
     }
     private static List<Course> GetCoursesList()

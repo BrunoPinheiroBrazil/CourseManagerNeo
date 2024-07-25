@@ -38,7 +38,7 @@ namespace CourseManager.DataStore.SqlServer.Tests
     public async Task RemnoveStudentAsync_Success()
     {
       //Arrange
-      var student = CommonTestsFactory.CreateStudent("M", 4);
+      var student = CommonTestsFactory.CreateStudent("M", 400000);
       await _fixture.Context.AddAsync(student);
       await _fixture.Context.SaveChangesAsync();
 

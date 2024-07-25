@@ -50,10 +50,10 @@ namespace CourseManager.DataStore.SqlServer.Tests
       //Arrange
       var students = new List<Student>
       {
-        CommonTestsFactory.CreateStudent("M",4),
-        CommonTestsFactory.CreateStudent("F",4),
-        CommonTestsFactory.CreateStudent("M",4),
-        CommonTestsFactory.CreateStudent("F",4)
+        CommonTestsFactory.CreateStudent("M",100000),
+        CommonTestsFactory.CreateStudent("F",100000),
+        CommonTestsFactory.CreateStudent("M",100000),
+        CommonTestsFactory.CreateStudent("F",100000)
       };
 
       students.ForEach(s =>
@@ -78,10 +78,10 @@ namespace CourseManager.DataStore.SqlServer.Tests
       //Arrange
       var students = new List<Student>
       {
-        CommonTestsFactory.CreateStudent("F",4),
-        CommonTestsFactory.CreateStudent("F",4),
-        CommonTestsFactory.CreateStudent("F",4),
-        CommonTestsFactory.CreateStudent("F",4)
+        CommonTestsFactory.CreateStudent("F", Id:40001),
+        CommonTestsFactory.CreateStudent("F", Id:40002),
+        CommonTestsFactory.CreateStudent("F", Id:40003),
+        CommonTestsFactory.CreateStudent("F", Id:40004)
       };
 
       students.ForEach(s =>
