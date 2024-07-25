@@ -44,10 +44,9 @@ namespace CourseManager.Integration.Tests
 
           db.Database.EnsureCreated();
 
-
           try
           {
-            Utilities.InitializeDbForTests(db);
+            Utilities.ReinitializeDbForTests(db);
           }
           catch (Exception ex)
           {

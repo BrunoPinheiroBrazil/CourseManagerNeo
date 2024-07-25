@@ -122,7 +122,7 @@ namespace CourseManager.Integration.Tests
     public async Task Delete_Student_Success()
     {
       //Arrange
-      var studentId = 3;
+      var studentId = 35403293;
       var url = $"coursemanager/delete/student/{studentId}";
 
       //Act
