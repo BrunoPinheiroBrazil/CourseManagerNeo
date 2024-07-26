@@ -9,6 +9,7 @@ namespace CourseManager.Models.Entities.TypeConfig
     {
       builder.ToTable("Student");
       builder.HasKey(s => s.StudentId);
+      builder.Property(s => s.StudentId).ValueGeneratedOnAdd();
       builder.Property(s => s.FirstName).HasColumnType("varchar(50)");
       builder.Property(s => s.SurName).HasColumnType("varchar(50)");
       builder.Property(s => s.Gender).HasColumnType("varchar(2)");

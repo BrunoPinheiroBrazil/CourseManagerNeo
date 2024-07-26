@@ -1,8 +1,6 @@
 ﻿using CourseManager.Models.Dtos;
 using CourseManagerServices;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace CourseManager.Controllers
 {
@@ -89,9 +87,9 @@ namespace CourseManager.Controllers
     }
 
     [HttpGet("course/{courseId}")]
-		public async Task<IActionResult> GetCourse(long courseId)
-		{
+    public async Task<IActionResult> GetCourse(long courseId)
+    {
       return Ok(await _services.GetCourse(courseId));
-		}
-	}
+    }
+  }
 }
